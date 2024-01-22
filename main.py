@@ -2,9 +2,9 @@ from pymongo import MongoClient
 import qrcode
 from PIL import Image
 import random
+import mongo
 
-client = MongoClient(
-    'mongodb+srv://swoyam:advaita@cluster0.pjlgcs3.mongodb.net/')
+client = MongoClient(mongo.mongoURL)
 db = client['test']
 
 
