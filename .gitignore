@@ -1,3 +1,4 @@
 /result/*
 /output/*
+/test/*
 mongo.py
