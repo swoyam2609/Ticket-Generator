@@ -16,7 +16,7 @@ for i in range(n):
     qr = qrcode.make(f'{str(num2)}advaita2024{str(num)}')
     qr.save(f'./result/myQr{str(num)+str(num2)}.png')
     db.tickets.insert_one(
-        {"qr": f'{str(num2)}advaita2024{str(num)}', "checkIn": False})
+        {"qr": f'{str(num2)}advaita2024{str(num)}', "checkIn": False, "sold": False})
     # joining the two images
     img1 = Image.open(f'./result/myQr{str(num)+str(num2)}.png')
     img2 = Image.open("./pass.png")
