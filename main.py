@@ -5,7 +5,7 @@ import random
 import mongo
 
 client = MongoClient(mongo.mongoURL)
-db = client['test']
+db = client['production']
 
 
 n = int(input("Enter the number of Tickets codes you want to generate: "))
@@ -16,7 +16,7 @@ for i in range(n):
     qr = qrcode.make(f'{str(num2)}advaita2024{str(num)}')
     qr.save(f'./result/myQr{str(num)+str(num2)}.png')
     db.tickets.insert_one(
-        {"qr": f'{str(num2)}advaita2024{str(num)}', "day0": False, "day1": False, "day2": False, "day3": False, "day0Checkin":False, "day1Checkin":False, "day2Checkin":False, "day3Checkin":False})
+        {"qr": f'{str(num2)}advaita2024{str(num)}', "day0": False, "day1": False, "day2": False, "day3": False, "day0Checkin": False, "day1Checkin": False, "day2Checkin": False, "day3Checkin": False})
     # joining the two images
     img1 = Image.open(f'./result/myQr{str(num)+str(num2)}.png')
     img2 = Image.open("./pass.png")
