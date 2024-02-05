@@ -3,6 +3,7 @@ import qrcode
 from PIL import Image
 import random
 import mongo
+import datetime
 
 client = MongoClient(mongo.mongoURL)
 db = client['production']
@@ -15,6 +16,7 @@ for i in range(n):
     num2 = random.randint(0, 9999999999999999999)
     qr = qrcode.make(f'{str(num2)}advaita2024{str(num)}')
     qr.save(f'./result/myQr{str(num)+str(num2)}.png')
+    db.generation.insert_one({"message":f'{n} tickets generated at: {datetime.datetime.now}'})
     db.tickets.insert_one(
         {"qr": f'{str(num2)}advaita2024{str(num)}', "day0": False, "day1": False, "day2": False, "day3": False, "day0Checkin": False, "day1Checkin": False, "day2Checkin": False, "day3Checkin": False})
     # joining the two images
