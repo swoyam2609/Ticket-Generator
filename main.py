@@ -10,18 +10,20 @@ db = client['production']
 
 
 n = int(input("Enter the number of Tickets codes you want to generate: "))
+db.generation.insert_one(
+    {"message": f'{n} tickets generated at: {datetime.datetime.now()}'})
 for i in range(n):
     # Generating the qr code
     num = random.randint(0, 9999999999999999999)
     num2 = random.randint(0, 9999999999999999999)
     qr = qrcode.make(f'{str(num2)}advaita2024{str(num)}')
     qr.save(f'./result/myQr{str(num)+str(num2)}.png')
-    db.generation.insert_one({"message":f'{n} tickets generated at: {datetime.datetime.now}'})
+
     db.tickets.insert_one(
         {"qr": f'{str(num2)}advaita2024{str(num)}', "day0": False, "day1": False, "day2": False, "day3": False, "day0Checkin": False, "day1Checkin": False, "day2Checkin": False, "day3Checkin": False})
     # joining the two images
     img1 = Image.open(f'./result/myQr{str(num)+str(num2)}.png')
-    img2 = Image.open("./pass.png")
+    img2 = Image.open("./pass2.png")
     w1, h1 = img1.size
     w2, h2 = img2.size
     newHeight = max(h1, h2)
